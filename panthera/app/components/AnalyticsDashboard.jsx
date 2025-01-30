@@ -1,6 +1,6 @@
 "use client"
 import React, { useState, useEffect, useRef } from "react"
-
+import FastPixelAnimation from "./FastPixelAnimation"
 
 const deviceData = []
 
@@ -152,7 +152,7 @@ const AnalyticsDashboard = () => {
             backgroundPosition: "center",
           }}
         >
-     
+          {showLeftAnimation && <FastPixelAnimation onComplete={handleLeftAnimationComplete} />}
           <div className="absolute inset-0 bg-white bg-opacity-0"></div>
           <div className="relative mt-16 lg:mt-4 md:mt-24 sm:mt-6 mx-4 sm:mx-12 md:mx-4 lg:mx-8 z-10">
             {renderTabContent()}
@@ -169,7 +169,7 @@ const AnalyticsDashboard = () => {
             backgroundPosition: "center",
           }}
         >
-         
+          {showRightAnimation && <FastPixelAnimation onComplete={handleRightAnimationComplete} />}
           <div className="absolute inset-0 bg-white bg-opacity-0"></div>
           <div className="relative z-10 flex flex-col space-y-4 justify-center">
             {/* Device Traffic Chart */}

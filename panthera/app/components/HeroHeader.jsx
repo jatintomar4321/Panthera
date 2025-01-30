@@ -25,7 +25,7 @@ export default function HeroHeader() {
     }
   }, [])
 
-  const opacity = useTransform(scrollY, [elementTop, elementBottom], [1, - 1])
+  const opacity = useTransform(scrollY, [elementTop, elementBottom], [2, - 1])
 
   const containerVariants = {
     hidden: { opacity: 0 },
