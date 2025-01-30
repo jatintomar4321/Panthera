@@ -2,7 +2,7 @@ export default function ContactSection() {
   return (
     <section className="w-full text-black bg-[#f9f6ef]">
       {/* Contact Info Section */}
-      <div className="max-w-7xl mx-auto px-6 py-16">
+      <div className="max-w-7xl mx-auto px-6 py-12">
         <div className="relative">
           {/* Top row with Contact Info text */}
           <p className="text-sm mb-6">Contact Info</p>
@@ -62,7 +62,7 @@ export default function ContactSection() {
 
       {/* Newsletter Section */}
       <div className="bg-[#2B3377] text-white">
-        <div className="max-w-7xl mx-auto px-6 py-16">
+        <div className="max-w-7xl mx-auto px-6 py-14">
           <div className="grid md:grid-cols-[1fr,1.5fr] gap-12">
             <div className="space-y-4">
               <h2 className="text-[2.75rem] leading-[1.2] font-bold">

@@ -123,13 +123,13 @@ const AnalyticsDashboard = () => {
    <div className="w-full relative min-h-screen sm:min-h-10 lg:min-h-screen md:min-h-12 max-w-7xl mx-auto px-6 pt-10 md:pt-20 sm:pt:24 lg:pt-12">
          {/* Custom Tabs */}
          <div className="border-b mb-8 overflow-x-auto">
-        <div className="flex space-x-4 md:space-x-8 min-w-max">
+        <div className="flex justify-center space-x-3 md:space-x-8 min-w-max">
           {["market", "predictive", "reports"].map((tab) => (
             <button
               key={tab}
               onClick={() => setActiveTab(tab)}
-              className={`pb-4 pt-2 px-2 md:px-0 text-sm md:text-base relative whitespace-nowrap ${
-                activeTab === tab ? "border-b-2 border-black" : "text-gray-500 hover:text-gray-700"
+              className={`pb-4 pt-2 px-2 md:px-0 text-sm md:text-base text-black relative whitespace-nowrap ${
+                activeTab === tab ? "border-b-2 border-black" : "text-gray-900 hover:text-gray"
               }`}
             >
               {tab === "market" && "Market Trends & Analysis"}

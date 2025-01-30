@@ -5,6 +5,10 @@ import SliderAbout from '../components/Slider1'
 import About3 from '../components/About3'
 import Nav from '../components/Nav'
 import Footer from '../components/Footer'
+import FounderSection from '../components/FounderSection'
+import AboutCrd1 from "../components/AboutCrd1"
+import AboutCrd2 from "../components/AboutCrd2"
+
 
 const About = () => {
   return (
@@ -13,7 +17,9 @@ const About = () => {
     <AboutHero/>
     <SliderAbout/>
     <About3/>
-    <SliderAbout/>
+    <FounderSection/>
+    <AboutCrd1/>
+    <AboutCrd2/>
     <Footer/>
     </div>
   )

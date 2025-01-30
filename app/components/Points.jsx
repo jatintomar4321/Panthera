@@ -22,7 +22,7 @@ export default function Points() {
     <div className="container mx-auto px-4 py-16 max-w-full">
   
       <div className="text-center mb-4">
-        <h1 className="text-5xl font-medium mb-6 text-black tracking-tight">Drive Real Estate Success with Your Data</h1>
+        <h1 className="text-2xl sm:text-4xl md:text-4xl lg:text-5xl  font-medium mb-6 text-black tracking-tight">Drive Real Estate Success with Your Data</h1>
         <p className="text-xs text-gray-600 max-w-2xl mb-20  mx-auto">
           Panthera transforms your data into actionable insights, empowering real estate success. With a scalable,
           accurate, and secure platform, we help you stay ahead in a dynamic market.

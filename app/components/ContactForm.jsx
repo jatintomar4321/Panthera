@@ -23,7 +23,7 @@ export default function ContactForm() {
   }
 
   return (
-    <section className="w-full text-black max-w-6xl mx-auto px-4 py-12">
+    <section className="w-full text-black max-w-6xl mx-auto px-4  py-20">
       <div className="space-y-8">
         <div className="space-y-4">
           <p className="text-sm font-medium">Get Started</p>

@@ -81,7 +81,7 @@ export default function Testimonials() {
               style={{ x }}
               onDrag={(_, info) => {
                 if (info.offset.x < 0) {
-                  controls.start({ opacity: 1 - Math.abs(info.offset.x) / width })
+                  controls.start({ opacity: 1 - Math.abs(info.offset.x)+2 / width })
                 }
               }}
             >

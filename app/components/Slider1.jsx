@@ -1,58 +1,53 @@
-import React, { useRef, useState, useEffect } from "react"
+import { useRef, useState } from "react"
 
 const SliderAbout = () => {
   const sliderRef = useRef(null)
   const [isDown, setIsDown] = useState(false)
   const [startX, setStartX] = useState(0)
+  const [startY, setStartY] = useState(0)
   const [scrollLeft, setScrollLeft] = useState(0)
+  const [scrollTop, setScrollTop] = useState(0)
 
-  const handleMouseDown = (e) => {
+  const handleStart = (clientX, clientY) => {
     setIsDown(true)
-    setStartX(e.pageX - sliderRef.current.offsetLeft)
+    setStartX(clientX - sliderRef.current.offsetLeft)
+    setStartY(clientY - sliderRef.current.offsetTop)
     setScrollLeft(sliderRef.current.scrollLeft)
+    setScrollTop(sliderRef.current.scrollTop)
   }
 
-  const handleMouseLeave = () => {
+  const handleEnd = () => {
     setIsDown(false)
   }
 
-  const handleMouseUp = () => {
-    setIsDown(false)
-  }
-
-  const handleMouseMove = (e) => {
+  const handleMove = (clientX, clientY) => {
     if (!isDown) return
-    e.preventDefault()
-    const x = e.pageX - sliderRef.current.offsetLeft
-    const walk = (x - startX) * 2
-    sliderRef.current.scrollLeft = scrollLeft - walk
+    const x = clientX - sliderRef.current.offsetLeft
+    const y = clientY - sliderRef.current.offsetTop
+    const walkX = (x - startX) * 2
+    const walkY = (y - startY) * 2
+    sliderRef.current.scrollLeft = scrollLeft - walkX
+    sliderRef.current.scrollTop = scrollTop - walkY
   }
 
-  const handleTouchStart = (e) => {
-    setIsDown(true)
-    setStartX(e.touches[0].pageX - sliderRef.current.offsetLeft)
-    setScrollLeft(sliderRef.current.scrollLeft)
-  }
+  const handleMouseDown = (e) => handleStart(e.pageX, e.pageY)
+  const handleMouseMove = (e) => handleMove(e.pageX, e.pageY)
 
-  const handleTouchMove = (e) => {
-    if (!isDown) return
-    const x = e.touches[0].pageX - sliderRef.current.offsetLeft
-    const walk = (x - startX) * 2
-    sliderRef.current.scrollLeft = scrollLeft - walk
-  }
+  const handleTouchStart = (e) => handleStart(e.touches[0].clientX, e.touches[0].clientY)
+  const handleTouchMove = (e) => handleMove(e.touches[0].clientX, e.touches[0].clientY)
 
   return (
-    <section className="w-full px-4 py-12 md:py-16 lg:py-20">
+    <section className="w-full px-4 py-8 md:py-10 lg:py-12">
       <div
         ref={sliderRef}
         className="grid grid-flow-col auto-cols-[85%] md:grid-cols-4 gap-4 overflow-x-auto md:overflow-hidden 
                    touch-pan-x snap-x snap-mandatory no-scrollbar"
         onMouseDown={handleMouseDown}
-        onMouseLeave={handleMouseLeave}
-        onMouseUp={handleMouseUp}
+        onMouseLeave={handleEnd}
+        onMouseUp={handleEnd}
         onMouseMove={handleMouseMove}
         onTouchStart={handleTouchStart}
-        onTouchEnd={handleMouseUp}
+        onTouchEnd={handleEnd}
         onTouchMove={handleTouchMove}
         style={{
           cursor: isDown ? "grabbing" : "grab",
@@ -87,12 +82,8 @@ const SliderAbout = () => {
           </p>
         </div>
 
-        <div className="  rounded-3xl overflow-hidden snap-start">
-          <img
-            src="./slider2.png"
-            alt="Circular architectural detail"
-            className="object-cover w-full h-full"
-          />
+        <div className="rounded-3xl overflow-hidden snap-start">
+          <img src="./slider2.png" alt="Circular architectural detail" className="object-cover w-full h-full" />
         </div>
       </div>
     </section>
@@ -100,3 +91,4 @@ const SliderAbout = () => {
 }
 
 export default SliderAbout
+
