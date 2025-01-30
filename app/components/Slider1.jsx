@@ -9,7 +9,7 @@
 
 import { useRef, useState, useEffect, useCallback } from "react"
 
-const SliderAbout = () => {
+const SliderAbout = ({c1h,c1p,i1,c2h,c2p,i2}) => {
   const sliderRef = useRef(null)
   const [currentSlide, setCurrentSlide] = useState(0)
   const [isDown, setIsDown] = useState(false)
@@ -77,17 +77,16 @@ const SliderAbout = () => {
       >
         <div className="bg-[#849BA7] rounded-3xl p-8 flex flex-col justify-end snap-start">
           <h2 className="text-white text-lg md:text-md font-medium mb-4 leading-tight">
-            Shaping the Future of Real Estate Intelligence
-          </h2>
+              {c1h}   
+             </h2>
           <p className="text-white text-xs">
-            Panthera empowers developers, investors, and enterprises with advanced analytics and predictive insights to
-            redefine decision-making in the real estate industry.
+            {c1p}
           </p>
         </div>
 
         <div className="rounded-3xl overflow-hidden snap-start">
           <img
-            src="./slider1.png"
+            src={i1}
             alt="Modern architectural building with blue sky"
             className="object-cover w-full h-full"
           />
@@ -95,16 +94,15 @@ const SliderAbout = () => {
 
         <div className="bg-[#849BA7] rounded-3xl p-8 flex flex-col justify-end snap-start">
           <h2 className="text-white text-lg md:text-md font-medium mb-4 leading-tight">
-            Powered by Advanced Analytics and Innovation
+            {c2h}
           </h2>
           <p className="text-white text-xs">
-            At Panthera, we believe that the fusion of innovation and actionable insights will transform how real estate
-            decisions are made.
+            {c2p}
           </p>
         </div>
 
         <div className="rounded-3xl overflow-hidden snap-start">
-          <img src="./slider2.png" alt="Circular architectural detail" className="object-cover w-full h-full" />
+          <img src={i2} alt="Circular architectural detail" className="object-cover w-full h-full" />
         </div>
       </div>
       <div className="flex justify-center mt-4 md:hidden">

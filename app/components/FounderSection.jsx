@@ -12,7 +12,15 @@ const FounderSection = () => {
         </p>
         
       </div>
-      <SliderAbout/>
+      <SliderAbout
+         c1h="Alejandro González Iñárritu"
+      c1p="We are a collective of analytics experts, real estate professionals, and visionaries who share a commitment to redefining market intelligence."
+      i1="./founder.png"
+      c2h="Powered by Advanced Analytics and Innovation"
+      c2p="At Panthera, we believe that the fusion of innovation and actionable insights will transform how real estate
+            decisions are made."
+      i2="./ceo.png"
+      />
     </section>
   )
 }
