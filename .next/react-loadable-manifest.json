@@ -1,0 +1,14 @@
+{
+  "app/LandingPage/page.js -> ../components/Points": {
+    "id": "app/LandingPage/page.js -> ../components/Points",
+    "files": [
+      "static/chunks/_app-pages-browser_app_components_Points_jsx.js"
+    ]
+  },
+  "app/page.js -> ./components/Points": {
+    "id": "app/page.js -> ./components/Points",
+    "files": [
+      "static/chunks/_app-pages-browser_app_components_Points_jsx.js"
+    ]
+  }
+}
