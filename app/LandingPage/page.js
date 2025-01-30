@@ -3,7 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion"
 import HeroHeader from "../components/HeroHeader"
 import HeroImage from "../components/HeroImage"
-
+import Banner from "../components/Banner"
 import dynamic from 'next/dynamic'
 import AnalyticsDashboard from "../components/AnalyticsDashboard"
 import Testimonials from "../components/Testimonial"
@@ -23,6 +23,7 @@ export default function LandingPage() {
         </motion.div>
         <div className="relative z-20">
           <HeroImage />
+          <Banner/>
           <AnalyticsDashboard/>
           
         </div>
@@ -33,7 +34,7 @@ export default function LandingPage() {
         
       </div>
      
-      {/* <Banner /> */}x
+      
     </main>
   )
 }
