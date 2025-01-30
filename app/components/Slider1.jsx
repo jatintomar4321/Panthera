@@ -1,47 +1,67 @@
-import { useRef, useState } from "react"
+
+
+
+
+
+
+
+
+
+import { useRef, useState, useEffect, useCallback } from "react"
 
 const SliderAbout = () => {
   const sliderRef = useRef(null)
+  const [currentSlide, setCurrentSlide] = useState(0)
   const [isDown, setIsDown] = useState(false)
   const [startX, setStartX] = useState(0)
-  const [startY, setStartY] = useState(0)
   const [scrollLeft, setScrollLeft] = useState(0)
-  const [scrollTop, setScrollTop] = useState(0)
 
-  const handleStart = (clientX, clientY) => {
+  const handleStart = useCallback((clientX) => {
     setIsDown(true)
-    setStartX(clientX - sliderRef.current.offsetLeft)
-    setStartY(clientY - sliderRef.current.offsetTop)
-    setScrollLeft(sliderRef.current.scrollLeft)
-    setScrollTop(sliderRef.current.scrollTop)
-  }
+    setStartX(clientX - (sliderRef.current?.offsetLeft || 0))
+    setScrollLeft(sliderRef.current?.scrollLeft || 0)
+  }, [])
 
-  const handleEnd = () => {
+  const handleEnd = useCallback(() => {
     setIsDown(false)
-  }
+  }, [])
 
-  const handleMove = (clientX, clientY) => {
-    if (!isDown) return
-    const x = clientX - sliderRef.current.offsetLeft
-    const y = clientY - sliderRef.current.offsetTop
-    const walkX = (x - startX) * 2
-    const walkY = (y - startY) * 2
-    sliderRef.current.scrollLeft = scrollLeft - walkX
-    sliderRef.current.scrollTop = scrollTop - walkY
-  }
+  const handleMove = useCallback(
+    (clientX) => {
+      if (!isDown) return
+      const x = clientX - (sliderRef.current?.offsetLeft || 0)
+      const walk = (x - startX) * 2
+      if (sliderRef.current) {
+        sliderRef.current.scrollLeft = scrollLeft - walk
+      }
+    },
+    [isDown, startX, scrollLeft],
+  )
 
-  const handleMouseDown = (e) => handleStart(e.pageX, e.pageY)
-  const handleMouseMove = (e) => handleMove(e.pageX, e.pageY)
+  const handleMouseDown = useCallback((e) => handleStart(e.pageX), [handleStart])
+  const handleMouseMove = useCallback((e) => handleMove(e.pageX), [handleMove])
+  const handleTouchStart = useCallback((e) => handleStart(e.touches[0].clientX), [handleStart])
+  const handleTouchMove = useCallback((e) => handleMove(e.touches[0].clientX), [handleMove])
 
-  const handleTouchStart = (e) => handleStart(e.touches[0].clientX, e.touches[0].clientY)
-  const handleTouchMove = (e) => handleMove(e.touches[0].clientX, e.touches[0].clientY)
+  useEffect(() => {
+    const slider = sliderRef.current
+    if (!slider) return
+
+    const handleScroll = () => {
+      const index = Math.round(slider.scrollLeft / slider.offsetWidth)
+      setCurrentSlide(index)
+    }
+
+    slider.addEventListener("scroll", handleScroll)
+    return () => slider.removeEventListener("scroll", handleScroll)
+  }, [])
 
   return (
     <section className="w-full px-4 py-8 md:py-10 lg:py-12">
       <div
         ref={sliderRef}
-        className="grid grid-flow-col auto-cols-[85%] md:grid-cols-4 gap-4 overflow-x-auto md:overflow-hidden 
-                   touch-pan-x snap-x snap-mandatory no-scrollbar"
+        className="grid grid-flow-col md:grid-flow-row md:grid-cols-4 auto-cols-[85%] gap-4 overflow-x-auto md:overflow-visible
+                   touch-pan-x snap-x snap-mandatory md:snap-none no-scrollbar"
         onMouseDown={handleMouseDown}
         onMouseLeave={handleEnd}
         onMouseUp={handleEnd}
@@ -52,6 +72,7 @@ const SliderAbout = () => {
         style={{
           cursor: isDown ? "grabbing" : "grab",
           WebkitOverflowScrolling: "touch",
+          scrollBehavior: "smooth",
         }}
       >
         <div className="bg-[#849BA7] rounded-3xl p-8 flex flex-col justify-end snap-start">
@@ -85,6 +106,24 @@ const SliderAbout = () => {
         <div className="rounded-3xl overflow-hidden snap-start">
           <img src="./slider2.png" alt="Circular architectural detail" className="object-cover w-full h-full" />
         </div>
+      </div>
+      <div className="flex justify-center mt-4 md:hidden">
+        {[...Array(4)].map((_, index) => (
+          <button
+            key={index}
+            className={`w-2 h-2 rounded-full mx-1 transition-all duration-300 ${
+              index === currentSlide ? "bg-[#849BA7] w-4" : "bg-gray-300"
+            }`}
+            onClick={() => {
+              if (sliderRef.current) {
+                sliderRef.current.scrollTo({
+                  left: index * sliderRef.current.offsetWidth,
+                  behavior: "smooth",
+                })
+              }
+            }}
+          />
+        ))}
       </div>
     </section>
   )
